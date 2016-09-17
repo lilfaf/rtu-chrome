@@ -11,7 +11,7 @@
   ],
   "background": {
     "scripts": [
-      "build/background.js"
+      "background.js"
     ],
     "persistent": true
   },
@@ -21,12 +21,5 @@
     "default_icon": {
       "38": "images/icon-38.png"
     }
-  },
-  "content_scripts": [
-    {
-      "matches": ["*://*/*"],
-      "css": [],
-      "js": ["content.js"]
-    }
-  ]
+  }
 }
