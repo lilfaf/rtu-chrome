@@ -5,10 +5,17 @@ class Player extends Component {
     super(props);
   }
 
+  componentDidMount() {
+    document.getElementById('audio-player').addEventListener('error', (error) => {
+      console.log(error)
+    });
+  }
+
   render() {
     return (
       <div>
-        <audio autoPlay="true"
+        <audio id="audio-player"
+               autoPlay="true"
                src="http://srv2.streaming-ingenierie.fr:8184/;stream/1">
         </audio>
       </div>
