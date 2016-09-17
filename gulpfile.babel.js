@@ -35,6 +35,13 @@ gulp.task('popup-html', () => {
     .pipe(gulp.dest('./app/build'));
 });
 
+gulp.task('popup-sass', function () {
+  return gulp.src('app/scripts/popup/styles/**/*.sass')
+    .pipe(plugins.sass().on('error', plugins.sass.logError))
+    .pipe(plugins.rename('main.css'))
+    .pipe(gulp.dest('./app/build/styles'));
+});
+
 gulp.task('copy-manifest', () => {
   return gulp.src('app/manifest.json')
     .pipe(gulp.dest('./app/build'));
@@ -49,6 +56,7 @@ gulp.task('build', [
   'copy-manifest',
   'copy-images',
   'popup-html',
+  'popup-sass',
   'popup-js',
   'background-html',
   'background-js'
