@@ -23,6 +23,12 @@ gulp.task('popup-js', (cb) => {
   });
 });
 
+gulp.task('background-html', () => {
+  return gulp.src('app/scripts/background/index.html')
+    .pipe(plugins.rename('background.html'))
+    .pipe(gulp.dest('./app/build'));
+});
+
 gulp.task('popup-html', () => {
   return gulp.src('app/scripts/popup/index.html')
     .pipe(plugins.rename('popup.html'))
@@ -44,6 +50,7 @@ gulp.task('build', [
   'copy-images',
   'popup-html',
   'popup-js',
+  'background-html',
   'background-js'
 ]);
 

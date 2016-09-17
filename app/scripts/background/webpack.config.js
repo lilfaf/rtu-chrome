@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = {
 
   entry: [
-    './app/scripts/background/index.js'
+    './app/scripts/background/index.jsx'
   ],
 
   output: {
@@ -12,15 +12,15 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['', '.js', '.json'],
+    extensions: ['', '.js', '.jsx', '.json'],
     modulesDirectories: ['node_modules']
   },
 
   module: {
     loaders: [
       {
-        test: /\.(js)?$/,
-        loader: 'babel',
+        test: /\.(jsx|js)?$/,
+        loader: 'babel-loader',
         exclude: /(node_modules)/,
         query: {
           presets: ['es2015', 'react']
