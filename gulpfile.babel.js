@@ -35,11 +35,16 @@ gulp.task('popup-html', () => {
     .pipe(gulp.dest('./app/build'));
 });
 
-gulp.task('popup-sass', function () {
+gulp.task('popup-sass', () => {
   return gulp.src('app/scripts/popup/styles/**/*.sass')
     .pipe(plugins.sass().on('error', plugins.sass.logError))
     .pipe(plugins.rename('main.css'))
     .pipe(gulp.dest('./app/build/styles'));
+});
+
+gulp.task('popup-fonts', () => {
+  return gulp.src('node_modules/materialize-css/fonts/roboto/Roboto-Regular.*')
+    .pipe(gulp.dest('./app/build/fonts/roboto/'));
 });
 
 gulp.task('copy-manifest', () => {
@@ -57,6 +62,7 @@ gulp.task('build', [
   'copy-images',
   'popup-html',
   'popup-sass',
+  'popup-fonts',
   'popup-js',
   'background-html',
   'background-js'
