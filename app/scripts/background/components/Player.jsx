@@ -1,13 +1,16 @@
 import React, {Component} from 'react';
 
+const rtuStreamURL = "http://srv2.streaming-ingenierie.fr:8184/;stream/1"
+
 class Player extends Component {
   constructor(props) {
     super(props);
   }
 
   componentDidMount() {
-    document.getElementById('audio-player').addEventListener('error', () => {
-      console.log(player.error);
+    let audio = document.getElementById('audio-player');
+    audio.addEventListener('error', () => {
+      console.log(audio.error);
     });
   }
 
@@ -15,7 +18,7 @@ class Player extends Component {
     return (
       <div>
         <audio id="audio-player"
-               src="http://srv2.streaming-ingenierie.fr:8184/;stream/1">
+               src={rtuStreamURL}>
         </audio>
       </div>
     );

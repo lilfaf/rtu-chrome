@@ -5,6 +5,10 @@ import {Store} from 'react-chrome-redux';
 
 import App from './components/App';
 
+// Needed for onTouchTap
+import injectTapEventPlugin from 'react-tap-event-plugin';
+injectTapEventPlugin();
+
 const store = new Store({
   portName: 'RTU'
 });
