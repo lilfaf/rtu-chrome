@@ -6,7 +6,7 @@ const initialPlayerState = {
 };
 
 const initialTrackState = {
-  name: 'Un minion ?',
+  title: 'Un minion ?',
   artist: 'Servietsky'
 };
 

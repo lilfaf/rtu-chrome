@@ -9,7 +9,7 @@ class TrackInfo extends Component {
   render() {
     return (
       <div id="track">
-         <p className="center-align">{`${this.props.name} - ${this.props.artist}`}</p>
+         <p className="center-align">{`${this.props.title} - ${this.props.artist}`}</p>
       </div>
     );
   }
@@ -18,7 +18,7 @@ class TrackInfo extends Component {
 const mapStateToProps = (state) => {
   if (state.track) {
     return {
-      name: state.track.name,
+      title: state.track.title,
       artist: state.track.artist
     }
   }
