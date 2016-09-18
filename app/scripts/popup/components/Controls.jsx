@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 
 import IconButton from 'material-ui/IconButton';
 import FontIcon from 'material-ui/FontIcon';
+import Slider from 'material-ui/Slider';
 import {grey300, grey400} from 'material-ui/styles/colors';
 
 class Controls extends Component {
@@ -24,9 +25,16 @@ class Controls extends Component {
     });
   }
 
+  handleVolume(event, value) {
+    this.props.dispatch({
+      type: 'SET_VOLUME',
+      value: value
+    })
+  }
+
   render() {
     return (
-      <div>
+      <div id="controls">
         <IconButton id="playback">
           <FontIcon className="material-icons">
             {this.props.icon}
@@ -37,6 +45,12 @@ class Controls extends Component {
             fast_forward
           </FontIcon>
         </IconButton>
+        <Slider
+          id="volume"
+          sliderStyle={{width: 100, margin: 0}}
+          value={this.props.volume}
+          onChange={this.handleVolume.bind(this)}
+        />
       </div>
     );
   }
@@ -44,7 +58,10 @@ class Controls extends Component {
 
 const mapStateToProps = (state) => {
   if (state.player) {
-    return { icon: state.player.icon }
+    return {
+      icon: state.player.icon,
+      volume: state.player.volume
+    }
   }
   return {}
 }

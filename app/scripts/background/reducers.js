@@ -1,6 +1,7 @@
 import {combineReducers} from 'redux';
 
 const initialState = {
+  volume: 0.5,
   icon: 'play_arrow'
 };
 
@@ -23,6 +24,10 @@ function player(state = initialState, action) {
       audio.src = src;
       audio.load();
       return player(state, { type: 'PLAY' });
+    case 'SET_VOLUME':
+      audio.volume = action.value;
+      state.volume = action.value;
+      return state;
     default:
       return state;
   }

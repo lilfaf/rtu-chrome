@@ -12,6 +12,8 @@ class Player extends Component {
     audio.addEventListener('error', () => {
       console.log(audio.error);
     });
+
+    setInterval(this.props.dispatch({type: 'TRACK_INFO'}), 2000)
   }
 
   render() {
