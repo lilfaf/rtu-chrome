@@ -1,11 +1,25 @@
 import {combineReducers} from 'redux';
 
-const initialState = {
-  volume: 0.5,
+const initialPlayerState = {
+  volume: 0.8,
   icon: 'play_arrow'
 };
 
-function player(state = initialState, action) {
+const initialTrackState = {
+  name: 'Un minion ?',
+  artist: 'Servietsky'
+};
+
+function track(state = initialTrackState, action) {
+  switch (action.type) {
+    case 'TRACK_INFO':
+      return action.data
+    default:
+      return state;
+  }
+}
+
+function player(state = initialPlayerState, action) {
   let audio = document.getElementById('audio-player');
   switch (action.type) {
     case 'PLAY':
@@ -31,8 +45,9 @@ function player(state = initialState, action) {
     default:
       return state;
   }
-};
+}
 
 export default combineReducers({
-  player
+  player,
+  track
 });

@@ -10,6 +10,7 @@ import NavigationClose from 'material-ui/svg-icons/navigation/close';
 import {white} from 'material-ui/styles/colors';
 
 import Controls from './Controls';
+import TrackInfo from './TrackInfo';
 
 class App extends Component {
   constructor(props) {
@@ -34,7 +35,18 @@ class App extends Component {
                 <MenuItem primaryText="About" />
               </IconMenu>
             } />
-          <Controls />
+          <div className="container">
+            <div className="row">
+              <div className="col s12">
+                <Controls />
+              </div>
+            </div>
+            <div className="row">
+              <div className="col s12">
+                <TrackInfo />
+              </div>
+            </div>
+          </div>
         </div>
       </MuiThemeProvider>
     );
