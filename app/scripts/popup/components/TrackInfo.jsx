@@ -10,6 +10,7 @@ class TrackInfo extends Component {
     return (
       <div id="track">
          <p className="center-align">{`${this.props.title} - ${this.props.artist}`}</p>
+         <p>{this.props.cover}</p>
       </div>
     );
   }
@@ -19,7 +20,9 @@ const mapStateToProps = (state) => {
   if (state.track) {
     return {
       title: state.track.title,
-      artist: state.track.artist
+      artist: state.track.artist,
+      cover: state.track.cover,
+      link: state.track.link
     }
   }
   return {}
