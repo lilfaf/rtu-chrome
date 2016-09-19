@@ -42,7 +42,7 @@ function player(state = initialPlayerState, action) {
       audio.pause();
       return { icon: 'play_arrow' };
     case 'TOGGLE_PLAYBACK':
-      action = audio.paused ? 'PLAY' : 'PAUSE'
+      let action = audio.paused ? 'PLAY' : 'PAUSE';
       return player(state, { type: action });
     case 'RESET':
       let src = audio.src;
