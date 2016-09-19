@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux';
 
-import Metadatas from './metadatas'
+import Metadata from './metadata'
 
 const initialPlayerState = {
   volume: 0.8,
@@ -18,11 +18,11 @@ function track(state = initialTrackState, action) {
   switch (action.type) {
     case 'TRACK_INFO':
       if (state.title != action.data.title) {
-        let metadatas = new Metadatas();
+        let meta = new Metadata();
         let query = `${action.data.title} - ${action.data.artist}`
-        metadatas.fetch(query, (meta) => {
-          console.log(meta);
-          return Object.assign(action.data, meta);
+        meta.fetch(query, (data) => {
+          console.log(data);
+          return Object.assign(action.data, data);
         });
       } else {
         return state;

@@ -7,7 +7,7 @@ const youtubeURL = 'https://www.googleapis.com/youtube/v3'
 const metaProviders = ['Deezer', 'SoundCloud'];
 const initialMetadata = {};
 
-export default class Metadatas {
+export default class Metadata {
   constructor(meta = initialMetadata) {
     this.meta = meta;
   }
