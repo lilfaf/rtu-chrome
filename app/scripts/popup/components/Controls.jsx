@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
+import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import FontIcon from 'material-ui/FontIcon';
 import Slider from 'material-ui/Slider';
@@ -34,25 +35,27 @@ class Controls extends Component {
 
   render() {
     return (
-      <div id="controls">
-        <IconButton id="playback">
-          <FontIcon className="material-icons">
-            {this.props.icon}
-          </FontIcon>
-        </IconButton>
-        <IconButton id="reset">
-          <FontIcon color={grey300} hoverColor={grey400} className="material-icons">
-            fast_forward
-          </FontIcon>
-        </IconButton>
-        <Slider
-          id="volume"
-          sliderStyle={{width: 100, margin: 0}}
-          defaultValue={0.8}
-          value={this.props.volume}
-          onChange={this.handleVolume.bind(this)}
-        />
-      </div>
+      <AppBar
+        iconElementLeft={
+          <div id='controls'>
+          <IconButton id='playback'>
+            <FontIcon className='material-icons'>
+              {this.props.icon}
+            </FontIcon>
+          </IconButton>
+          <IconButton id='reset'>
+            <FontIcon color={grey300} hoverColor={grey400} className='material-icons'>
+              fast_forward
+            </FontIcon>
+          </IconButton>
+          <Slider
+            id='volume'
+            sliderStyle={{width: 100, margin: 0}}
+            defaultValue={0.8}
+            value={this.props.volume}
+            onChange={this.handleVolume.bind(this)} />
+          </div>
+        } />
     );
   }
 }

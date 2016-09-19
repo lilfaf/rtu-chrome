@@ -27,14 +27,16 @@ function track(state = initialTrackState, action) {
       } else {
         return state;
       }
+      return action.data;
     default:
       return state;
   }
 }
 
 function player(state = initialPlayerState, action) {
+  let actionType = action.type;
   let audio = document.getElementById('audio-player');
-  switch (action.type) {
+  switch (actionType) {
     case 'PLAY':
       audio.play();
       return { icon: 'pause' };

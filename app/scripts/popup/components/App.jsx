@@ -23,7 +23,6 @@ class App extends Component {
         <div>
           <AppBar
             title="RTU.FM"
-            iconElementLeft={<IconButton></IconButton>}
             iconElementRight={
               <IconMenu
                 iconButtonElement={
@@ -35,16 +34,10 @@ class App extends Component {
                 <MenuItem primaryText="About" />
               </IconMenu>
             } />
-          <div className="container">
-            <div className="row">
-              <div className="col s12">
-                <Controls />
-              </div>
-            </div>
-            <div className="row">
-              <div className="col s12">
-                <TrackInfo />
-              </div>
+          <Controls />
+          <div className="row">
+            <div className="col s12">
+              <TrackInfo />
             </div>
           </div>
         </div>
