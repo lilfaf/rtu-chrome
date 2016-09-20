@@ -5,38 +5,46 @@ const deezerURL = 'http://api.deezer.com'
 const youtubeURL = 'https://www.googleapis.com/youtube/v3'
 
 const metaProviders = ['Deezer', 'SoundCloud'];
-const initialMetadata = {};
 
 export default class Metadata {
-  constructor(meta = initialMetadata) {
-    this.meta = meta;
-  }
-
   fetch(query, cb) {
-    for (const provider of metaProviders) {
-      if (this.meta && this.meta.link && this.meta.cover_medium) { break; }
-      if (provider == 'Deezer') {
-        this.meta = this._searchDeezer(query);
-      } else if (provider == 'SoundCloud') {
-        this.meta = this._searchSoundCloud(query);
+    let providers = metaProviders;
+
+    let responseHandler = (meta) => {
+      if (meta.link && meta.cover) {
+        console.log(`found metadata on ${meta.provider} !`)
+        return cb(meta)
+      } else if (providers) {
+        return search(providers.shift());
       }
-    }
-    cb(this.meta);
+    };
+    let search = (provider) => {
+      if (provider == 'Deezer') {
+        this._searchDeezer(query, (meta) => {
+          responseHandler(meta);
+        });
+      } else if (provider == 'SoundCloud') {
+        this._searchSoundCloud(query, (meta) => {
+          responseHandler(meta);
+        });
+      }
+    };
+    search(providers.shift());
   }
 
-  _searchDeezer(query) {
+  _searchDeezer(query, cb) {
     this._apiRequest(`${deezerURL}/search?q=${query}`, (resp) => {
-      if (resp.total != 0) {
-        return this._deezerJSONToMeta(resp.data[0])
+      if (resp.total) {
+        return cb(this._deezerJSONToMeta(resp.data[0]));
       }
     });
   }
 
-  _searchSoundCloud(query) {
+  _searchSoundCloud(query, cb) {
     let url = `${soundcloudURL}/tracks?client_id=${soundcloudClientID}&q=${query}`
     this._apiRequest(url, (data) => {
-      if (data.size != 0) {
-        return this._soundCloudJSONToMeta(data[0]);
+      if (data.length) {
+        return cb(this._soundCloudJSONToMeta(data[0]));
       }
     });
   }
@@ -52,6 +60,7 @@ export default class Metadata {
 
   _deezerJSONToMeta(data) {
     return {
+      provider: 'Deezer',
       link: data.link,
       cover: data.album.cover_medium
     }
@@ -59,7 +68,8 @@ export default class Metadata {
 
   _soundCloudJSONToMeta(data) {
     return {
-      link: data.permlink_url,
+      provider: 'SoundCloud',
+      link: data.permalink_url,
       cover: data.artwork_url
     }
   }

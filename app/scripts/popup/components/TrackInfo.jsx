@@ -8,9 +8,9 @@ class TrackInfo extends Component {
 
   render() {
     return (
-      <div id="track">
-         <p className="center-align">{`${this.props.title} - ${this.props.artist}`}</p>
-         <p>{this.props.cover}</p>
+      <div>
+         <p className="center-align flow-text">{`${this.props.title} - ${this.props.artist}`}</p>
+         <img src={this.props.cover}/>
       </div>
     );
   }

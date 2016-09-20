@@ -36,25 +36,28 @@ class Controls extends Component {
   render() {
     return (
       <AppBar
+        className='controls-navbar'
         iconElementLeft={
-          <div id='controls'>
-          <IconButton id='playback'>
-            <FontIcon className='material-icons'>
-              {this.props.icon}
-            </FontIcon>
-          </IconButton>
-          <IconButton id='reset'>
-            <FontIcon color={grey300} hoverColor={grey400} className='material-icons'>
-              fast_forward
-            </FontIcon>
-          </IconButton>
+          <div>
+            <IconButton id='playback'>
+              <FontIcon className='material-icons'>
+                {this.props.icon}
+              </FontIcon>
+            </IconButton>
+            <IconButton id='reset'>
+              <FontIcon color={grey300} hoverColor={grey400} className='material-icons'>
+                fast_forward
+              </FontIcon>
+            </IconButton>
+          </div>
+        }
+        iconElementRight={
           <Slider
             id='volume'
             sliderStyle={{width: 100, margin: 0}}
             defaultValue={0.8}
             value={this.props.volume}
             onChange={this.handleVolume.bind(this)} />
-          </div>
         } />
     );
   }
