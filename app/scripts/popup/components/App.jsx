@@ -22,18 +22,8 @@ class App extends Component {
       <MuiThemeProvider>
         <div>
           <AppBar
-            title='RTU.FM'
-            iconElementLeft={<div></div>}
-            iconElementRight={
-              <IconMenu
-                iconButtonElement={
-                  <IconButton><MoreVertIcon color={white} /></IconButton>
-                }
-                targetOrigin={{horizontal: 'right', vertical: 'top'}}
-                anchorOrigin={{horizontal: 'right', vertical: 'top'}}
-              >
-                <MenuItem primaryText='About' />
-              </IconMenu>
+            iconElementLeft={
+              <img className='logo' src='images/nav-logo.png'/>
             } />
           <Controls />
           <div className='row'>

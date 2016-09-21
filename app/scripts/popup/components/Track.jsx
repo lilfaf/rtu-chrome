@@ -18,7 +18,7 @@ class Track extends Component {
         </div>
         <div className='card-content track-info'>
           <h5>{this.props.title}</h5>
-          <span className='caption grey-text'>by {this.props.artist}</span>
+          <span className='caption grey-text'>par {this.props.artist}</span>
         </div>
       </div>
     );
