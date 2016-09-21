@@ -1,4 +1,5 @@
 const soundcloudClientID = 'e782bdefd7e7cc623284d9135a1a72c8'
+const youtubeAPIKey = 'AIzaSyCUUCZuzuVd6niJt0cIg-8ofYncBHx9imo'
 
 const soundcloudURL = 'https://api.soundcloud.com'
 const deezerURL = 'http://api.deezer.com'
@@ -6,7 +7,7 @@ const youtubeURL = 'https://www.googleapis.com/youtube/v3'
 
 export default class Metadata {
   fetch(params, cb) {
-    let providers = ['Deezer', 'SoundCloud'];
+    let providers = ['Deezer', 'SoundCloud', 'Youtube'];
 
     let responseHandler = (meta) => {
       if (meta.link && meta.cover) {
@@ -27,6 +28,10 @@ export default class Metadata {
         this._searchSoundCloud(params, (meta) => {
           responseHandler(meta);
         });
+      } else if (provider == 'Youtube') {
+        this._searchYoutube(params, (meta) => {
+          responseHandler(meta);
+        });
       }
     };
     search(providers.shift());
@@ -44,7 +49,7 @@ export default class Metadata {
   }
 
   _searchSoundCloud(params, cb) {
-    let query = `${params.title} - ${params.artist}`
+    let query = `${params.title} ${params.artist}`
     let url = `${soundcloudURL}/tracks?client_id=${soundcloudClientID}&q=${query}`
     this._apiRequest(url, (data) => {
       if (data.length) {
@@ -55,12 +60,16 @@ export default class Metadata {
     });
   }
 
-  // TODO
-  _searchYoutube(query) {
-    this._apiRequest(`${youtubeURL}/search?part=snippet&q=${query}`, (data) => {
-      console.log('found track on youtube !');
-      console.log(data);
-      return data;
+  _searchYoutube(params, cb) {
+    let query = `${params.title} ${params.artist}`;
+    let urlParams = `part=snippet&type=video&key=${youtubeAPIKey}&q=${query}`;
+    let url = `${youtubeURL}/search?${urlParams}`;
+    this._apiRequest(url, (data) => {
+      if (data.items.length) {
+        cb(this._youtubeJSONToMeta(data.items[0]));
+      } else {
+        cb({provider: 'Youtube'});
+      }
     });
   }
 
@@ -77,6 +86,14 @@ export default class Metadata {
       provider: 'SoundCloud',
       link: data.permalink_url,
       cover: (data.artwork_url ? data.artwork_url.replace('large', 't500x500') : '')
+    }
+  }
+
+  _youtubeJSONToMeta(data) {
+    return {
+      provider: 'Youtube',
+      link: `https://www.youtube.com/watch?v=${data.id.videoId}`,
+      cover: data.snippet.thumbnails.high.url
     }
   }
 
