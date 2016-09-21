@@ -3,40 +3,19 @@ import {combineReducers} from 'redux';
 import Metadata from './metadata'
 
 const initialPlayerState = {
-  volume: 0.8,
+  volume: 1.0,
   icon: 'play_arrow'
 };
 
-const initialTrackState = {
-  title: 'Un minion ?',
-  artist: 'Servietsky',
-  link: '',
-  cover: ''
+const initialTrackState = {};
+
+const initialCoverState = {
+  preloaded: false
 };
 
-function track(state = initialTrackState, action) {
-  switch (action.type) {
-    case 'TRACK_INFO':
-      if (state.title != action.data.title) {
-        let meta = new Metadata();
-        let query = `${action.data.title} - ${action.data.artist}`
-        meta.fetch(query, (data) => {
-          console.log(data);
-          return Object.assign(action.data, data);
-        });
-      } else {
-        return state;
-      }
-      return action.data;
-    default:
-      return state;
-  }
-}
-
-function player(state = initialPlayerState, action) {
-  let actionType = action.type;
+function player(state = initialPlayerState, action = {}) {
   let audio = document.getElementById('audio-player');
-  switch (actionType) {
+  switch (action.type) {
     case 'PLAY':
       audio.play();
       return { icon: 'pause' };
@@ -44,8 +23,8 @@ function player(state = initialPlayerState, action) {
       audio.pause();
       return { icon: 'play_arrow' };
     case 'TOGGLE_PLAYBACK':
-      let action = audio.paused ? 'PLAY' : 'PAUSE';
-      return player(state, { type: action });
+      let actionType = audio.paused ? 'PLAY' : 'PAUSE';
+      return player(state, { type: actionType });
     case 'RESET':
       let src = audio.src;
       audio.src = '';
@@ -62,7 +41,34 @@ function player(state = initialPlayerState, action) {
   }
 }
 
+function track(state = initialTrackState, action) {
+  switch (action.type) {
+    case 'TRACK_INFO':
+      if (state.title != action.data.title) {
+        let meta = new Metadata();
+        meta.fetch(action.data, (data) => {
+          return Object.assign(action.data, data);
+        });
+      } else {
+        return state;
+      }
+      return action.data;
+    default:
+      return state;
+  }
+}
+
+function cover(state = initialCoverState, action) {
+  switch (action.type) {
+    case 'PRELOADED':
+      return { preloaded: true }
+    default:
+      return state;
+  }
+}
+
 export default combineReducers({
   player,
-  track
+  track,
+  cover
 });

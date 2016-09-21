@@ -10,7 +10,7 @@ import NavigationClose from 'material-ui/svg-icons/navigation/close';
 import {white} from 'material-ui/styles/colors';
 
 import Controls from './Controls';
-import TrackInfo from './TrackInfo';
+import Track from './Track';
 
 class App extends Component {
   constructor(props) {
@@ -22,7 +22,8 @@ class App extends Component {
       <MuiThemeProvider>
         <div>
           <AppBar
-            title="RTU.FM"
+            title='RTU.FM'
+            iconElementLeft={<div></div>}
             iconElementRight={
               <IconMenu
                 iconButtonElement={
@@ -31,13 +32,13 @@ class App extends Component {
                 targetOrigin={{horizontal: 'right', vertical: 'top'}}
                 anchorOrigin={{horizontal: 'right', vertical: 'top'}}
               >
-                <MenuItem primaryText="About" />
+                <MenuItem primaryText='About' />
               </IconMenu>
             } />
           <Controls />
-          <div className="row">
-            <div className="col s12">
-              <TrackInfo />
+          <div className='row'>
+            <div className='col s12'>
+              <Track />
             </div>
           </div>
         </div>

@@ -14,6 +14,9 @@ class Player extends Component {
     let audio = document.getElementById('audio-player');
     audio.addEventListener('error', () => {
       console.log(audio.error);
+      this.props.dispatch({
+        type: 'RESET'
+      });
     });
 
     this.fetchTrackInfo();

@@ -25,6 +25,7 @@
     "react": "^15.3.1",
     "react-chrome-redux": "0.0.8",
     "react-dom": "^15.3.1",
+    "react-preload": "^0.4.0",
     "react-redux": "^4.4.5",
     "react-tap-event-plugin": "^1.0.0",
     "redux": "^3.6.0"

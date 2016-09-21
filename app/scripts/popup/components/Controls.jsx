@@ -16,17 +16,17 @@ class Controls extends Component {
     document.getElementById('playback').addEventListener('click', () => {
       this.props.dispatch({
         type: 'TOGGLE_PLAYBACK'
-      })
+      });
     });
 
     document.getElementById('reset').addEventListener('click', () => {
       this.props.dispatch({
         type: 'RESET'
-      })
+      });
     });
   }
 
-  handleVolume(event, value) {
+  handleVolume(e, value) {
     this.props.dispatch({
       type: 'SET_VOLUME',
       value: value
@@ -69,8 +69,8 @@ const mapStateToProps = (state) => {
       icon: state.player.icon,
       volume: state.player.volume
     }
-  }
-  return {}
+  };
+  return {};
 }
 
 export default connect(mapStateToProps)(Controls);
