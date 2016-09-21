@@ -93,7 +93,7 @@ export default class Metadata {
     return {
       provider: 'Youtube',
       link: `https://www.youtube.com/watch?v=${data.id.videoId}`,
-      cover: data.snippet.thumbnails.high.url
+      cover: data.snippet.thumbnails.medium.url
     }
   }
 
