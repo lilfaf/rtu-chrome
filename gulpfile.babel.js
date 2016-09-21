@@ -68,6 +68,13 @@ gulp.task('build', [
   'background-js'
 ]);
 
+gulp.task('package', function () {
+  var manifest = require('./app/build/manifest.json');
+  return gulp.src('./app/build/**')
+    .pipe(plugins.zip(`rtu-chrome-${manifest.version}.zip`))
+    .pipe(gulp.dest('./dist'));
+});
+
 gulp.task('watch', ['default'], () => {
   gulp.watch('app/**/*', ['build']);
 });
