@@ -55,7 +55,7 @@ class Controls extends Component {
           <Slider
             id='volume'
             sliderStyle={{width: 100, margin: 0}}
-            defaultValue={0.8}
+            defaultValue={1.0}
             value={this.props.volume}
             onChange={this.handleVolume.bind(this)} />
         } />
