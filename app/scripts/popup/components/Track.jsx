@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 import Cover from './Cover';
+import CircularProgress from 'material-ui/CircularProgress';
 
 class Track extends Component {
   constructor(props) {
@@ -9,12 +10,19 @@ class Track extends Component {
   }
 
   render() {
+    let cover;
+    if (this.props.cover) {
+      cover = <Cover coverUrl={this.props.cover}/>;
+    } else {
+      cover = <CircularProgress className='valign center'/>;
+    }
+
     return (
       <div className='card'>
         <div className='card-image'>
-          {this.props.cover &&
-            <Cover coverUrl={this.props.cover}/>
-          }
+          <div className='cover valign-wrapper'>
+            {cover}
+          </div>
         </div>
         <div className='card-content track-info'>
           <h5>{this.props.title}</h5>

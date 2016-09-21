@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 import Preload from 'react-preload';
-import LinearProgress from 'material-ui/LinearProgress';
+import CircularProgress from 'material-ui/CircularProgress';
 
 class Cover extends Component {
   constructor(props) {
@@ -22,18 +22,17 @@ class Cover extends Component {
   render() {
     return (
       <Preload
-        loadingIndicator={<LinearProgress mode='indeterminate' />}
+        loadingIndicator={
+          <CircularProgress className='valign center'/>
+        }
         images={[this.props.coverUrl]}
         onError={this._handleImageLoadError}
         onSuccess={this._handleImageLoadSuccess.bind(this)}
         resolveOnError
-        mountChildren
-        >
-        <div>
-          {this.props.preloaded &&
-            <img className='cover' src={this.props.coverUrl} />
-          }
-        </div>
+        mountChildren>
+        {this.props.preloaded &&
+          <img src={this.props.coverUrl} />
+        }
       </Preload>
     );
   }
