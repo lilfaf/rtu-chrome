@@ -18,3 +18,16 @@ render(
   <Provider store={store}>
     <Player />
   </Provider>, document.body);
+
+// Setup google analytics
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-84558963-1']);
+_gaq.push(['_trackPageview']);
+
+(() => {
+  let ga = document.createElement('script');
+  ga.type = 'text/javascript';
+  ga.async = true;
+  ga.src = 'https://ssl.google-analytics.com/ga.js';
+  document.body.appendChild(ga);
+})();
