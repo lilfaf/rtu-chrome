@@ -68,7 +68,7 @@ gulp.task('build', [
   'background-js'
 ]);
 
-gulp.task('package', function () {
+gulp.task('package', ['build'], () => {
   var manifest = require('./app/build/manifest.json');
   return gulp.src('./app/build/**')
     .pipe(plugins.zip(`rtu-chrome-${manifest.version}.zip`))
