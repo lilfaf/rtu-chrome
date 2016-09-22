@@ -20,9 +20,7 @@ class Track extends Component {
     return (
       <div className='card'>
         <div className='card-image'>
-          <div className='cover valign-wrapper'>
-            {cover}
-          </div>
+          <div className='cover valign-wrapper'>{cover}</div>
         </div>
         <div className='card-content track-info'>
           <h5>{this.props.title}</h5>

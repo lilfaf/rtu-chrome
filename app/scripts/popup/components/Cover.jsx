@@ -25,13 +25,13 @@ class Cover extends Component {
         loadingIndicator={
           <CircularProgress className='valign center'/>
         }
-        images={[this.props.coverUrl]}
+        images={[this.props.coverURL]}
         onError={this._handleImageLoadError}
         onSuccess={this._handleImageLoadSuccess.bind(this)}
         resolveOnError
         mountChildren>
         {this.props.preloaded &&
-          <img src={this.props.coverUrl} />
+          <img src={this.props.coverURL} />
         }
       </Preload>
     );
