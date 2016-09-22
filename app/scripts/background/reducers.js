@@ -2,9 +2,11 @@ import {combineReducers} from 'redux';
 
 import Metadata from './metadata'
 
+const streamURL = 'http://srv2.streaming-ingenierie.fr:8184/;stream/1'
+
 const initialPlayerState = {
   volume: 1.0,
-  icon: 'play_arrow'
+  icon: 'play_arrow',
 };
 
 const initialTrackState = {};
@@ -17,6 +19,7 @@ function player(state = initialPlayerState, action = {}) {
   let audio = document.getElementById('audio-player');
   switch (action.type) {
     case 'PLAY':
+      if(!audio.src) { audio.src = streamURL }
       audio.play();
       return { icon: 'pause' };
     case 'PAUSE':

@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
-const streamURL = 'http://srv2.streaming-ingenierie.fr:8184/;stream/1'
 const playingURL = 'http://rtufm.com/script/playing.php'
 
 class Player extends Component {
@@ -11,8 +10,7 @@ class Player extends Component {
   }
 
   componentDidMount()   {
-    let audio = document.getElementById('audio-player');
-    audio.addEventListener('error', () => {
+    document.getElementById('audio-player').addEventListener('error', () => {
       console.log(audio.error);
       this.props.dispatch({
         type: 'RESET'
@@ -46,9 +44,7 @@ class Player extends Component {
   render() {
     return (
       <div>
-        <audio id="audio-player"
-               src={streamURL}>
-        </audio>
+        <audio id='audio-player'></audio>
       </div>
     );
   }
