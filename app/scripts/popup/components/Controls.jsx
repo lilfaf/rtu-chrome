@@ -6,6 +6,7 @@ import IconButton from 'material-ui/IconButton';
 import FontIcon from 'material-ui/FontIcon';
 import Slider from 'material-ui/Slider';
 import {grey300, grey400} from 'material-ui/styles/colors';
+import {changePlaybackState, resetStream, changeVolume} from '../actions'
 
 class Controls extends Component {
   constructor(props) {
@@ -14,23 +15,16 @@ class Controls extends Component {
 
   componentDidMount() {
     document.getElementById('playback').addEventListener('click', () => {
-      this.props.dispatch({
-        type: 'TOGGLE_PLAYBACK'
-      });
+      this.props.dispatch(changePlaybackState());
     });
 
     document.getElementById('reset').addEventListener('click', () => {
-      this.props.dispatch({
-        type: 'RESET'
-      });
+      this.props.dispatch(resetStream());
     });
   }
 
   handleVolume(e, value) {
-    this.props.dispatch({
-      type: 'SET_VOLUME',
-      value: value
-    })
+    this.props.dispatch(changeVolume(value));
   }
 
   render() {

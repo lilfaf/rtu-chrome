@@ -11,12 +11,14 @@ class Cover extends Component {
 
   _handleImageLoadError(images) {
     console.log(`failed to preload ${images}`);
+    this.props.dispatch({
+      type: 'PRELOAD_ERROR',
+      value: true
+    })
   }
 
   _handleImageLoadSuccess() {
-    this.props.dispatch({
-      type: 'PRELOADED'
-    });
+    console.log(`preload succeed`);
   }
 
   render() {
@@ -30,7 +32,7 @@ class Cover extends Component {
         onSuccess={this._handleImageLoadSuccess.bind(this)}
         resolveOnError
         mountChildren>
-        {this.props.preloaded &&
+        {!this.props.preloadError &&
           <img src={this.props.coverURL} />
         }
       </Preload>

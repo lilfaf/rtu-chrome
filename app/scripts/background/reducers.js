@@ -1,7 +1,5 @@
 import {combineReducers} from 'redux';
 
-import Metadata from './metadata'
-
 const streamURL = 'http://srv2.streaming-ingenierie.fr:8184/;stream/1'
 
 const initialPlayerState = {
@@ -12,7 +10,7 @@ const initialPlayerState = {
 const initialTrackState = {};
 
 const initialCoverState = {
-  preloaded: false
+  preloadError: false
 };
 
 function player(state = initialPlayerState, action = {}) {
@@ -47,14 +45,6 @@ function player(state = initialPlayerState, action = {}) {
 function track(state = initialTrackState, action) {
   switch (action.type) {
     case 'TRACK_INFO':
-      if (state.title != action.data.title) {
-        let meta = new Metadata();
-        meta.fetch(action.data, (data) => {
-          return Object.assign(action.data, data);
-        });
-      } else {
-        return state;
-      }
       return action.data;
     default:
       return state;
@@ -63,8 +53,8 @@ function track(state = initialTrackState, action) {
 
 function cover(state = initialCoverState, action) {
   switch (action.type) {
-    case 'PRELOADED':
-      return { preloaded: true }
+    case 'PRELOAD_ERROR':
+      return { preloadError: true }
     default:
       return state;
   }

@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 import Cover from './Cover';
-import CircularProgress from 'material-ui/CircularProgress';
 
 class Track extends Component {
   constructor(props) {
@@ -10,17 +9,14 @@ class Track extends Component {
   }
 
   render() {
-    let cover;
-    if (this.props.cover) {
-      cover = <Cover coverUrl={this.props.cover}/>;
-    } else {
-      cover = <CircularProgress className='valign center'/>;
-    }
-
     return (
       <div className='card'>
         <div className='card-image'>
-          <div className='cover valign-wrapper'>{cover}</div>
+          <div className='cover valign-wrapper'>
+            {(this.props.metadatas && this.props.metadatas.length) &&
+              <Cover coverURL={this.props.metadatas[0].cover}/>
+            }
+          </div>
         </div>
         <div className='card-content track-info'>
           <h5>{this.props.title}</h5>
@@ -36,8 +32,7 @@ const mapStateToProps = (state) => {
     return {
       title: state.track.title,
       artist: state.track.artist,
-      cover: state.track.cover,
-      link: state.track.link
+      metadatas: state.track.metadatas
     };
   }
   return {};

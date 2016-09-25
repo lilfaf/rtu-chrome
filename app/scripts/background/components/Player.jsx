@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-
-const playingURL = 'http://rtufm.com/script/playing.php'
+import { configureChannel } from '../channel';
 
 class Player extends Component {
   constructor(props) {
     super(props);
-    this.fetchTrackInfo.bind(this);
+    this.channel = configureChannel();
   }
 
   componentDidMount()   {
@@ -17,28 +16,12 @@ class Player extends Component {
       });
     });
 
-    this.fetchTrackInfo();
-    setInterval(() => {
-      this.fetchTrackInfo()
-    }, 2000);
-  }
-
-  fetchTrackInfo() {
-    let req = new XMLHttpRequest();
-    req.onload = () => {
-      if (this.props) {
-        this.props.dispatch({
-          type: 'TRACK_INFO',
-          data: {
-            title: req.responseXML.getElementsByTagName('b')[0].innerText,
-            artist: req.responseXML.getElementsByTagName('p')[0].innerText
-          }
-        });
-      }
-    };
-    req.open('GET', playingURL);
-    req.responseType = 'document';
-    req.send();
+    this.channel.on('new_track', (payload) => {
+      this.props.dispatch({
+        type: 'TRACK_INFO',
+        data: payload
+      });
+    });
   }
 
   render() {
