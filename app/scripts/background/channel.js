@@ -1,7 +1,7 @@
 import { Socket } from 'phoenix-socket';
 
 export function configureChannel() {
-  let socket = new Socket('ws://localhost:4000/socket');
+  let socket = new Socket('ws://54.154.142.114/socket');
   socket.connect();
 
   let channel = socket.channel('track:*');
