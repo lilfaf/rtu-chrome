@@ -1,7 +1,7 @@
 import { Socket } from 'phoenix-socket';
 
 export function configureChannel() {
-  let socket = new Socket('ws://54.154.142.114/socket');
+  let socket = new Socket('wss://rtu-server.herokuapp.com/socket');
   socket.connect();
 
   let channel = socket.channel('track:*');
