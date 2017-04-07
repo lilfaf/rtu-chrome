@@ -1,13 +1,8 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import { configureChannel } from '../channel';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import channel from '../channel';
 
 class Player extends Component {
-  constructor(props) {
-    super(props);
-    this.channel = configureChannel();
-  }
-
   componentDidMount()   {
     document.getElementById('audio-player').addEventListener('error', () => {
       console.log(audio.error);
@@ -16,7 +11,7 @@ class Player extends Component {
       });
     });
 
-    this.channel.on('new_track', (payload) => {
+    channel.on('new_track', (payload) => {
       this.props.dispatch({
         type: 'TRACK_INFO',
         data: payload

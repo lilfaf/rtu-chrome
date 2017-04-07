@@ -1,30 +1,23 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import FontIcon from 'material-ui/FontIcon';
 import Slider from 'material-ui/Slider';
-import {grey300, grey400} from 'material-ui/styles/colors';
-import {changePlaybackState, resetStream, changeVolume} from '../actions'
+import { grey300, grey400 } from 'material-ui/styles/colors';
+import { changePlaybackState, resetStream, changeVolume } from '../actions';
 
 class Controls extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  componentDidMount() {
-    document.getElementById('playback').addEventListener('click', () => {
-      this.props.dispatch(changePlaybackState());
-    });
-
-    document.getElementById('reset').addEventListener('click', () => {
-      this.props.dispatch(resetStream());
-    });
-  }
-
-  handleVolume(e, value) {
+  _onVolumeChange(e, value) {
     this.props.dispatch(changeVolume(value));
+  }
+
+  _onPlayClick() {
+    this.props.dispatch(changePlaybackState());
+  }
+
+  _onResetClick() {
+    this.props.dispatch(resetStream());
   }
 
   render() {
@@ -33,12 +26,12 @@ class Controls extends Component {
         className='controls-navbar'
         iconElementLeft={
           <div>
-            <IconButton id='playback'>
+            <IconButton onClick={this._onPlayClick.bind(this)}>
               <FontIcon className='material-icons'>
                 {this.props.icon}
               </FontIcon>
             </IconButton>
-            <IconButton id='reset'>
+            <IconButton onClick={this._onResetClick.bind(this)}>
               <FontIcon color={grey300} hoverColor={grey400} className='material-icons'>
                 fast_forward
               </FontIcon>
@@ -51,7 +44,7 @@ class Controls extends Component {
             sliderStyle={{width: 100, margin: 0}}
             defaultValue={1.0}
             value={this.props.volume}
-            onChange={this.handleVolume.bind(this)} />
+            onChange={this._onVolumeChange.bind(this)} />
         } />
     );
   }

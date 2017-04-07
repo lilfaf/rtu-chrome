@@ -1,4 +1,4 @@
-import {combineReducers} from 'redux';
+import { combineReducers } from 'redux';
 
 const streamURL = 'http://srv2.streaming-ingenierie.fr:8184/;stream/1'
 

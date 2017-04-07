@@ -1,24 +1,15 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Preload from 'react-preload';
 import CircularProgress from 'material-ui/CircularProgress';
 
 class Cover extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  _handleImageLoadError(images) {
+  _onLoadError(images) {
     console.log(`failed to preload ${images}`);
     this.props.dispatch({
       type: 'PRELOAD_ERROR',
       value: true
     })
-  }
-
-  _handleImageLoadSuccess() {
-    console.log(`preload succeed`);
   }
 
   render() {
@@ -28,8 +19,7 @@ class Cover extends Component {
           <CircularProgress className='valign center'/>
         }
         images={[this.props.coverURL]}
-        onError={this._handleImageLoadError}
-        onSuccess={this._handleImageLoadSuccess.bind(this)}
+        onError={this._onLoadError}
         resolveOnError
         mountChildren>
         {!this.props.preloadError &&

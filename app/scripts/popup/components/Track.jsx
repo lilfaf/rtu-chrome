@@ -1,13 +1,8 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Cover from './Cover';
 
 class Track extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div className='card'>
