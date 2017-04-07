@@ -5,24 +5,28 @@ const streamURL = 'http://srv2.streaming-ingenierie.fr:8184/;stream/1'
 const initialPlayerState = {
   volume: 1,
   icon: 'play_arrow',
+  playing: false
 };
 
 const initialTrackState = {};
 
 function player(state = initialPlayerState, action = {}) {
-  let audio = document.getElementById('audio-player');
   switch (action.type) {
     case 'PLAY':
-      if(!audio.src) { audio.src = streamURL }
-      audio.play();
-      return { icon: 'pause' };
+      return Object.assign({}, state, {
+        icon: 'pause',
+        playing: true
+      });
     case 'PAUSE':
-      audio.pause();
-      return { icon: 'play_arrow' };
+      return Object.assign({}, state, {
+        icon: 'play_arrow',
+        playing: false
+      })
     case 'TOGGLE_PLAYBACK':
-      let actionType = audio.paused ? 'PLAY' : 'PAUSE';
+      let actionType = state.playing ? 'PAUSE' : 'PLAY';
       return player(state, { type: actionType });
     case 'RESET':
+      let audio = document.getElementById('audio-player');
       let src = audio.src;
       audio.src = '';
       audio.load();

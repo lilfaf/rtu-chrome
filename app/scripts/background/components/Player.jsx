@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import channel from '../channel';
 import { setTrack, resetStream } from '../../popup/actions';
 
+const streamUrl = 'http://srv2.streaming-ingenierie.fr:8184/;stream/1'
+
 class Player extends Component {
   componentDidMount()   {
     channel.on('new_track', (data) => {
@@ -14,6 +16,12 @@ class Player extends Component {
     if (nextProps.volume !== undefined) {
       this.refs.player.volume = nextProps.volume
     }
+
+    if (nextProps.playing) {
+      this.refs.player.play()
+    } else {
+      this.refs.player.pause()
+    }
   }
 
   render() {
@@ -22,6 +30,7 @@ class Player extends Component {
         <audio
           ref='player'
           id='audio-player'
+          src={streamUrl}
           onError={() => {
             this.props.dispatch(resetStream())
           }}>
@@ -33,7 +42,8 @@ class Player extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    volume: state.player.volume
+    volume: state.player.volume,
+    playing: state.player.playing
   };
 }
 
