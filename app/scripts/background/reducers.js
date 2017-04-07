@@ -3,15 +3,11 @@ import { combineReducers } from 'redux';
 const streamURL = 'http://srv2.streaming-ingenierie.fr:8184/;stream/1'
 
 const initialPlayerState = {
-  volume: 1.0,
+  volume: 1,
   icon: 'play_arrow',
 };
 
 const initialTrackState = {};
-
-const initialCoverState = {
-  preloadError: false
-};
 
 function player(state = initialPlayerState, action = {}) {
   let audio = document.getElementById('audio-player');
@@ -34,9 +30,9 @@ function player(state = initialPlayerState, action = {}) {
       audio.load();
       return player(state, { type: 'PLAY' });
     case 'SET_VOLUME':
-      audio.volume = action.value;
-      state.volume = action.value;
-      return state;
+      return Object.assign({}, state, {
+        volume: action.value
+      });
     default:
       return state;
   }
@@ -44,17 +40,8 @@ function player(state = initialPlayerState, action = {}) {
 
 function track(state = initialTrackState, action) {
   switch (action.type) {
-    case 'TRACK_INFO':
+    case 'SET_TRACK':
       return action.data;
-    default:
-      return state;
-  }
-}
-
-function cover(state = initialCoverState, action) {
-  switch (action.type) {
-    case 'PRELOAD_ERROR':
-      return { preloadError: true }
     default:
       return state;
   }
@@ -62,6 +49,5 @@ function cover(state = initialCoverState, action) {
 
 export default combineReducers({
   player,
-  track,
-  cover
+  track
 });

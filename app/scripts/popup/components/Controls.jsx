@@ -21,6 +21,7 @@ class Controls extends Component {
   }
 
   render() {
+    console.log(this.props.volume)
     return (
       <AppBar
         className='controls-navbar'

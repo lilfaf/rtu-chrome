@@ -4,12 +4,22 @@ import Preload from 'react-preload';
 import CircularProgress from 'material-ui/CircularProgress';
 
 class Cover extends Component {
+  constructor() {
+    super();
+    this.state = {
+      preloadError: false
+    };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.coverUrl !== nextProps.coverUrl) {
+      this.setState({ preloadError: false });
+    }
+  }
+
   _onLoadError(images) {
-    console.log(`failed to preload ${images}`);
-    this.props.dispatch({
-      type: 'PRELOAD_ERROR',
-      value: true
-    })
+    console.log(`preloading failed ${images}`);
+    this.setState({ preloadError: true });
   }
 
   render() {
@@ -18,21 +28,16 @@ class Cover extends Component {
         loadingIndicator={
           <CircularProgress className='valign center'/>
         }
-        images={[this.props.coverURL]}
+        images={[this.props.coverUrl]}
         onError={this._onLoadError}
         resolveOnError
         mountChildren>
-        {!this.props.preloadError &&
-          <img src={this.props.coverURL} />
+        {!this.state.preloadError &&
+          <img src={this.props.coverUrl} />
         }
       </Preload>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  if (!!state.cover) { return state.cover; }
-  return {};
-}
-
-export default connect(mapStateToProps)(Cover);
+export default Cover;

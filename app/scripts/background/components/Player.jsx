@@ -1,35 +1,40 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import channel from '../channel';
+import { setTrack, resetStream } from '../../popup/actions';
 
 class Player extends Component {
   componentDidMount()   {
-    document.getElementById('audio-player').addEventListener('error', () => {
-      console.log(audio.error);
-      this.props.dispatch({
-        type: 'RESET'
-      });
+    channel.on('new_track', (data) => {
+      this.props.dispatch(setTrack(data))
     });
+  }
 
-    channel.on('new_track', (payload) => {
-      this.props.dispatch({
-        type: 'TRACK_INFO',
-        data: payload
-      });
-    });
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.volume !== undefined) {
+      this.refs.player.volume = nextProps.volume
+    }
   }
 
   render() {
     return (
       <div>
-        <audio id='audio-player'></audio>
+        <audio
+          ref='player'
+          id='audio-player'
+          onError={() => {
+            this.props.dispatch(resetStream())
+          }}>
+        </audio>
       </div>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  return {}
+  return {
+    volume: state.player.volume
+  };
 }
 
 export default connect(mapStateToProps)(Player);
