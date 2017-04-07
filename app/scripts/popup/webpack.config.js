@@ -13,8 +13,8 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['', '.js', '.jsx', '.json'],
-    modulesDirectories: ['node_modules']
+    extensions: ['.js', '.jsx', '.json'],
+    modules: ['node_modules']
   },
 
   module: {
@@ -22,10 +22,7 @@ module.exports = {
       {
         test: /\.(jsx|js)?$/,
         loader: 'babel-loader',
-        exclude: /(node_modules)/,
-        query: {
-          presets: ['es2015', 'react']
-        }
+        exclude: /(node_modules)/
       }
     ]
   }
