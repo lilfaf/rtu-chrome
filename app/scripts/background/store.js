@@ -1,8 +1,18 @@
-import { createStore } from 'redux';
-import { wrapStore } from 'react-chrome-redux';
-import reducers from './reducers';
+import { createStore, applyMiddleware } from 'redux';
+import { wrapStore, alias } from 'react-chrome-redux';
+import thunk from 'redux-thunk';
+import rootReducer from './reducers/index';
+import aliases from './aliases';
 
-const store = createStore(reducers, {});
+const middleware = [
+  alias(aliases),
+  thunk
+];
+
+const store = createStore(
+  rootReducer,
+  applyMiddleware(...middleware)
+);
 
 wrapStore(store, {
   portName: 'RTU'

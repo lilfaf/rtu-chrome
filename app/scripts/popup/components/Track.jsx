@@ -9,13 +9,16 @@ class Track extends Component {
         <div className='card-image'>
           <div className='cover valign-wrapper'>
             {(this.props.metadatas && this.props.metadatas.length) &&
-              <Cover coverURL={this.props.metadatas[0].cover}/>
+              <Cover coverUrl={this.props.metadatas[0].cover}/>
             }
           </div>
         </div>
         <div className='card-content track-info'>
-          <h5>{this.props.title}</h5>
-          <span className='caption grey-text'>par {this.props.artist}</span>
+          {(this.props.title && this.props.artist) &&
+            <div>
+              <h5>{this.props.title}</h5>
+              <span className='caption grey-text'>par {this.props.artist}</span>
+            </div>}
         </div>
       </div>
     );

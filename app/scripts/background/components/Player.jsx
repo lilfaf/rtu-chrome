@@ -1,35 +1,49 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import channel from '../channel';
+import { setTrack } from '../actions';
+
+const streamUrl = 'http://srv2.streaming-ingenierie.fr:8184/;stream/1'
 
 class Player extends Component {
   componentDidMount()   {
-    document.getElementById('audio-player').addEventListener('error', () => {
-      console.log(audio.error);
-      this.props.dispatch({
-        type: 'RESET'
-      });
+    channel.on('new_track', (data) => {
+      this.props.dispatch(setTrack(data))
     });
+  }
 
-    channel.on('new_track', (payload) => {
-      this.props.dispatch({
-        type: 'TRACK_INFO',
-        data: payload
-      });
-    });
+  componentWillReceiveProps(nextProps) {
+    const player = this.refs.player
+
+    if (nextProps.volume !== undefined) {
+      player.volume = nextProps.volume
+    }
+
+    if (nextProps.playing) {
+      player.src = streamUrl
+      player.play()
+    } else {
+      player.src = ''
+    }
   }
 
   render() {
     return (
       <div>
-        <audio id='audio-player'></audio>
+        <audio
+          ref='player'
+          src={streamUrl}>
+        </audio>
       </div>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  return {}
+  return {
+    volume: state.player.volume,
+    playing: state.player.playing
+  };
 }
 
 export default connect(mapStateToProps)(Player);

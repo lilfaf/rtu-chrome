@@ -7,7 +7,7 @@ import Player from './components/Player';
 render(
   <Provider store={store}>
     <Player />
-  </Provider>, document.body);
+  </Provider>, document.getElementById('player'));
 
 // Setup google analytics
 var _gaq = _gaq || [];
