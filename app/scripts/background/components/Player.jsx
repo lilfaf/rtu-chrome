@@ -13,16 +13,17 @@ class Player extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    const player = this.refs.player
+
     if (nextProps.volume !== undefined) {
-      this.refs.player.volume = nextProps.volume
+      player.volume = nextProps.volume
     }
 
     if (nextProps.playing) {
-      this.refs.player.src = streamUrl
-      this.refs.player.play()
+      player.src = streamUrl
+      player.play()
     } else {
-      this.refs.player.src = ''
-      this.refs.player.load()
+      player.src = ''
     }
   }
 
@@ -31,11 +32,7 @@ class Player extends Component {
       <div>
         <audio
           ref='player'
-          id='audio-player'
-          src={streamUrl}
-          onError={(error) => {
-            console.log(error)
-          }}>
+          src={streamUrl}>
         </audio>
       </div>
     );
