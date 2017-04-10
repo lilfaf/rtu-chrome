@@ -5,7 +5,7 @@ import IconButton from 'material-ui/IconButton';
 import FontIcon from 'material-ui/FontIcon';
 import Slider from 'material-ui/Slider';
 import { grey300, grey400 } from 'material-ui/styles/colors';
-import { changePlaybackState, resetStream, changeVolume } from '../actions';
+import { changePlaybackState, resetStream, changeVolume } from '../../background/actions';
 
 class Controls extends Component {
   _onVolumeChange(e, value) {
@@ -21,7 +21,6 @@ class Controls extends Component {
   }
 
   render() {
-    console.log(this.props.volume)
     return (
       <AppBar
         className='controls-navbar'

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import channel from '../channel';
-import { setTrack, resetStream } from '../../popup/actions';
+import { setTrack, resetStream } from '../actions';
 
 const streamUrl = 'http://srv2.streaming-ingenierie.fr:8184/;stream/1'
 

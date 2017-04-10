@@ -1,16 +1,10 @@
-import { combineReducers } from 'redux';
-
-const streamURL = 'http://srv2.streaming-ingenierie.fr:8184/;stream/1'
-
 const initialPlayerState = {
   volume: 1,
   icon: 'play_arrow',
   playing: false
 };
 
-const initialTrackState = {};
-
-function player(state = initialPlayerState, action = {}) {
+export default function player(state = initialPlayerState, action = {}) {
   switch (action.type) {
     case 'PLAY':
       return Object.assign({}, state, {
@@ -22,9 +16,6 @@ function player(state = initialPlayerState, action = {}) {
         icon: 'play_arrow',
         playing: false
       })
-    case 'TOGGLE_PLAYBACK':
-      let actionType = state.playing ? 'PAUSE' : 'PLAY';
-      return player(state, { type: actionType });
     case 'RESET':
       let audio = document.getElementById('audio-player');
       let src = audio.src;
@@ -41,17 +32,3 @@ function player(state = initialPlayerState, action = {}) {
       return state;
   }
 }
-
-function track(state = initialTrackState, action) {
-  switch (action.type) {
-    case 'SET_TRACK':
-      return action.data;
-    default:
-      return state;
-  }
-}
-
-export default combineReducers({
-  player,
-  track
-});
