@@ -1,7 +1,6 @@
 const path = require('path');
 
 module.exports = {
-
   entry: [
     './app/scripts/background/index.jsx'
   ],
