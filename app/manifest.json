@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "RTU.fm",
   "description": "RTU.fm - Le Grand Mix",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "icons": {
     "128": "images/icon-128.png"
   },
