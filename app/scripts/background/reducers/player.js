@@ -1,5 +1,5 @@
 const initialPlayerState = {
-  volume: 1,
+  volume: 100,
   icon: 'play_arrow',
   playing: false
 };

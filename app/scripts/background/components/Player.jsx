@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Sound from 'react-sound';
 import channel from '../channel';
 import { setTrack } from '../actions';
 
@@ -12,28 +13,17 @@ class Player extends Component {
     });
   }
 
-  componentWillReceiveProps(nextProps) {
-    const player = this.refs.player
-
-    if (nextProps.volume !== undefined) {
-      player.volume = nextProps.volume
-    }
-
-    if (nextProps.playing) {
-      player.src = streamUrl
-      player.play()
-    } else {
-      player.src = ''
-    }
-  }
-
   render() {
     return (
       <div>
-        <audio
-          ref='player'
-          src={streamUrl}>
-        </audio>
+        {this.props.playing &&
+          <Sound
+            ref='player'
+            url={streamUrl}
+            volume={this.props.volume}
+            playStatus={Sound.status.PLAYING}
+            />
+        }
       </div>
     );
   }

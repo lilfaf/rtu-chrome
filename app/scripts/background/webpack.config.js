@@ -12,7 +12,10 @@ module.exports = {
 
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
-    modules: ['node_modules']
+    modules: ['node_modules'],
+    alias: {
+      soundmanager2: 'soundmanager2/script/soundmanager2-nodebug-jsmin.js'
+    }
   },
 
   module: {
