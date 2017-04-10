@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import channel from '../channel';
-import { setTrack, resetStream } from '../actions';
+import { setTrack } from '../actions';
 
 const streamUrl = 'http://srv2.streaming-ingenierie.fr:8184/;stream/1'
 
@@ -18,9 +18,11 @@ class Player extends Component {
     }
 
     if (nextProps.playing) {
+      this.refs.player.src = streamUrl
       this.refs.player.play()
     } else {
-      this.refs.player.pause()
+      this.refs.player.src = ''
+      this.refs.player.load()
     }
   }
 
@@ -31,8 +33,8 @@ class Player extends Component {
           ref='player'
           id='audio-player'
           src={streamUrl}
-          onError={() => {
-            this.props.dispatch(resetStream())
+          onError={(error) => {
+            console.log(error)
           }}>
         </audio>
       </div>

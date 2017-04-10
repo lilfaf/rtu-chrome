@@ -5,7 +5,7 @@ import IconButton from 'material-ui/IconButton';
 import FontIcon from 'material-ui/FontIcon';
 import Slider from 'material-ui/Slider';
 import { grey300, grey400 } from 'material-ui/styles/colors';
-import { changePlaybackState, resetStream, changeVolume } from '../../background/actions';
+import { changePlaybackState, changeVolume } from '../../background/actions';
 
 class Controls extends Component {
   _onVolumeChange(e, value) {
@@ -14,10 +14,6 @@ class Controls extends Component {
 
   _onPlayClick() {
     this.props.dispatch(changePlaybackState());
-  }
-
-  _onResetClick() {
-    this.props.dispatch(resetStream());
   }
 
   render() {
@@ -29,11 +25,6 @@ class Controls extends Component {
             <IconButton onClick={this._onPlayClick.bind(this)}>
               <FontIcon className='material-icons'>
                 {this.props.icon}
-              </FontIcon>
-            </IconButton>
-            <IconButton onClick={this._onResetClick.bind(this)}>
-              <FontIcon color={grey300} hoverColor={grey400} className='material-icons'>
-                fast_forward
               </FontIcon>
             </IconButton>
           </div>

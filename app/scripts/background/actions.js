@@ -17,10 +17,6 @@ export function pauseStream() {
   return { type: 'PAUSE' };
 }
 
-export function resetStream() {
-  return { type: 'RESET' };
-}
-
 export function setTrack(data) {
   return {
     type: 'SET_TRACK',
