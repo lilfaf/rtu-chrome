@@ -9,7 +9,7 @@
   "permissions": [
     "https://rtu-server.herokuapp.com/"
   ],
-  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com https://use.fontawesome.com/fce124ebc8.js; object-src 'self'",
   "background": {
     "page": "background.html",
     "persistent": true

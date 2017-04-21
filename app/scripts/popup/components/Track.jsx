@@ -3,6 +3,20 @@ import { connect } from 'react-redux';
 import Cover from './Cover';
 
 class Track extends Component {
+  renderSocialLinks() {
+    return this.props.metadatas.map((meta, i) => {
+      const className = `fa fa-${meta.provider} fa-3x`
+      return (
+        <a key={i}
+           onClick={() => {
+             chrome.tabs.create({url: meta.link})
+          }}>
+          <i className={className}></i>
+        </a>
+      )
+    })
+  }
+
   render() {
     return (
       <div className='card'>
@@ -14,11 +28,14 @@ class Track extends Component {
           </div>
         </div>
         <div className='card-content track-info'>
+
           {(this.props.title && this.props.artist) &&
             <div>
               <h5>{this.props.title}</h5>
               <span className='caption grey-text'>par {this.props.artist}</span>
             </div>}
+
+          {this.renderSocialLinks()}
         </div>
       </div>
     );
