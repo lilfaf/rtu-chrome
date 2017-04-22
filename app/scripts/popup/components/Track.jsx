@@ -4,20 +4,6 @@ import Cover from './Cover';
 import SocialLinks from './SocialLinks';
 
 class Track extends Component {
-  // renderSocialLinks() {
-  //   return this.props.metadatas.map((meta, i) => {
-  //     const className = `fa fa-${meta.provider} fa-3x`
-  //     return (
-  //       <a key={i}
-  //          onClick={() => {
-  //            chrome.tabs.create({url: meta.link})
-  //         }}>
-  //         <i className={className}></i>
-  //       </a>
-  //     )
-  //   })
-  // }
-
   render() {
     return (
       <div className='card'>
