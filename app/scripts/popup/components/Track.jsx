@@ -1,8 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Cover from './Cover';
+import SocialLinks from './SocialLinks';
 
 class Track extends Component {
+  // renderSocialLinks() {
+  //   return this.props.metadatas.map((meta, i) => {
+  //     const className = `fa fa-${meta.provider} fa-3x`
+  //     return (
+  //       <a key={i}
+  //          onClick={() => {
+  //            chrome.tabs.create({url: meta.link})
+  //         }}>
+  //         <i className={className}></i>
+  //       </a>
+  //     )
+  //   })
+  // }
+
   render() {
     return (
       <div className='card'>
@@ -19,6 +34,8 @@ class Track extends Component {
               <h5>{this.props.title}</h5>
               <span className='caption grey-text'>par {this.props.artist}</span>
             </div>}
+
+          <SocialLinks metadatas={this.props.metadatas} />
         </div>
       </div>
     );

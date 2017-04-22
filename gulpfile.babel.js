@@ -62,7 +62,7 @@ gulp.task('build', [
   'copy-images',
   'popup-html',
   'popup-sass',
-  'popup-fonts',
+  // 'popup-fonts',
   'popup-js',
   'background-html',
   'background-js'
